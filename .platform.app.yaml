@@ -13,3 +13,5 @@ web:
 mounts:
   "storage": "shared:files/storage"
   "bootstrap/cache": "shared:files/bootstrap_cache"
+  "storage/framework/sessions": "shared:files/sessions"
+  "storage/framework/cache": "shared:files/cache"
