@@ -1,5 +1,11 @@
 <?php
 
+$vars = [];
+
+if (!empty($_ENV['PLATFORM_VARIABLES'])){
+    $vars = json_decode(base64_decode($_ENV['PLATFORM_VARIABLES']), TRUE);
+}
+
 return [
 
     /*
@@ -91,7 +97,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', $vars['APP_KEY']),
 
     'cipher' => 'AES-256-CBC',
 
