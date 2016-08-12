@@ -11,7 +11,7 @@ web:
         - index.php
       allow: true
 mounts:
-  "storage": "shared:files/storage"
+  "storage/logs": "shared:files/logs"
   "bootstrap/cache": "shared:files/bootstrap_cache"
   "storage/framework/sessions": "shared:files/sessions"
   "storage/framework/cache": "shared:files/cache"
