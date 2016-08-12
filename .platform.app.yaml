@@ -12,3 +12,4 @@ web:
       allow: true
 mounts:
   "storage": "shared:files/storage"
+  "bootstrap/cache": "shared:files/bootstrap_cache"
