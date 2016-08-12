@@ -13,3 +13,10 @@ web:
 mounts:
   "/storage": "shared:files/storage"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
+hooks:
+  deploy: |
+  mkdir -p storage/app/public
+  mkdir -p storage/framework/views
+  mkdir -p storage/framework/sessions
+  mkdir -p storage/framework/cache
+  mkdir -p storage/logs
