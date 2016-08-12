@@ -1,6 +1,8 @@
 <?php
 
-$vars = [];
+$vars = [
+    'APP_KEY' => '',
+];
 
 if (!empty($_ENV['PLATFORM_VARIABLES'])){
     $vars = json_decode(base64_decode($_ENV['PLATFORM_VARIABLES']), TRUE);
