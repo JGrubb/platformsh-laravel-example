@@ -1,3 +1,0 @@
-redis:
-  type: redis:3.0
-  disk: 1024
