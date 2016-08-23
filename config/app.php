@@ -2,8 +2,8 @@
 
 if (!empty($_ENV['PLATFORM_VARIABLES'])){
     $pltvars = json_decode(base64_decode($_ENV['PLATFORM_VARIABLES']), TRUE);
-    foreach($pltvars as $var) {
-        putenv("$var=$pltvars[$var]");
+    foreach($pltvars as $k => $v) {
+        putenv("$k=$v");
     }
 
 }
