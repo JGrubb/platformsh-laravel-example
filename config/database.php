@@ -1,5 +1,16 @@
 <?php
 
+if ($relationships = getenv('PLATFORM_RELATIONSHIPS')){
+    $pltrels = json_decode(base64_decode($relationships), TRUE);
+    $database = $pltrels['database'][0];
+    putenv("DB_CONNECTION={$database['scheme']}");
+    putenv("DB_HOST={$database['host']}");
+    putenv("DB_PORT={$database['port']}");
+    putenv("DB_DATABASE={$database['path']}");
+    putenv("DB_USERNAME={$database['username']}");
+    putenv("DB_PASSWORD={$database['password']}");
+}
+
 return [
 
     /*
