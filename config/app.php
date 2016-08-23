@@ -1,11 +1,11 @@
 <?php
 
-$vars = [
-    'APP_KEY' => '',
-];
-
 if (!empty($_ENV['PLATFORM_VARIABLES'])){
-    $vars = json_decode(base64_decode($_ENV['PLATFORM_VARIABLES']), TRUE);
+    $pltvars = json_decode(base64_decode($_ENV['PLATFORM_VARIABLES']), TRUE);
+    foreach($pltvars as $var) {
+        putenv("$var=$pltvars[$var]");
+    }
+
 }
 
 return [
@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', $vars['APP_KEY']),
+    'key' => env('APP_KEY', 'secret_key_here'),
 
     'cipher' => 'AES-256-CBC',
 
