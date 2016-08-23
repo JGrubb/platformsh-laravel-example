@@ -1,5 +1,7 @@
 name: app
-type: php:7.0
+type: php:5.6
+  extensions:
+    - pdo_pgsql
 build:
   flavor: composer
 disk: 2048
@@ -15,7 +17,7 @@ mounts:
   "/storage": "shared:files/storage"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 relationships:
-  database: "mysql:mysql"
+  database: "pgsql:postgresql"
 hooks:
   deploy: |
     mkdir -p storage/app/public
