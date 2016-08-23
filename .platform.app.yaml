@@ -18,7 +18,7 @@ mounts:
   "/storage": "shared:files/storage"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 relationships:
-  database: "pgsql:postgresql"
+  big_daddy: "pgsql:postgresql"
 hooks:
   deploy: |
     mkdir -p storage/app/public
@@ -26,4 +26,4 @@ hooks:
     mkdir -p storage/framework/sessions
     mkdir -p storage/framework/cache
     mkdir -p storage/logs
-    php artisan migrate
+    php artisan migrate --force
