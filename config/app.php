@@ -5,7 +5,6 @@ if (!empty($_ENV['PLATFORM_VARIABLES'])){
     foreach($pltvars as $k => $v) {
         putenv("$k=$v");
     }
-
 }
 
 return [
