@@ -10,6 +10,7 @@ web:
       index:
         - index.php
       allow: true
+      passthru: "/index.php"
 mounts:
   "/storage": "shared:files/storage"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
