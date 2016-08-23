@@ -13,6 +13,8 @@ web:
 mounts:
   "/storage": "shared:files/storage"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
+relationships:
+  database: "pgsql:postgresql"
 hooks:
   deploy: |
     mkdir -p storage/app/public
