@@ -18,7 +18,7 @@ mounts:
   "/storage": "shared:files/storage"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 relationships:
-  big_daddy: "pgsql:postgresql"
+  database: "pgsql:postgresql"
 hooks:
   deploy: |
     mkdir -p storage/app/public
