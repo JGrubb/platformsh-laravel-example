@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "predis/predis": "^1.1",
-        "platformsh/config-reader": "^0.0.1",
+        "platformsh/config-reader": "^0.0.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
