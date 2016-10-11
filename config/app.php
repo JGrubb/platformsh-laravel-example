@@ -1,9 +1,5 @@
 <?php
 
-$config = new Platformsh\LaravelHelper\Config();
-
-dd($config);
-
 return [
 
     /*
