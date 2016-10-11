@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "de16d05fc06552dc1d71ce68476e92de",
-    "content-hash": "555c2da87a3ef7957f30ae8558eb5d36",
+    "hash": "3d921b8e46929a7b2844328e8d1fed34",
+    "content-hash": "147e27f4c0b70767c7c564b714650da8",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -786,6 +786,48 @@
                 "random"
             ],
             "time": "2016-03-18 20:34:03"
+        },
+        {
+            "name": "platformsh/config-reader",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/platformsh/platformsh-php-helper.git",
+                "reference": "21703980f8badb35a81518963a55256c51ef1220"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/platformsh/platformsh-php-helper/zipball/21703980f8badb35a81518963a55256c51ef1220",
+                "reference": "21703980f8badb35a81518963a55256c51ef1220",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Platformsh\\ConfigReader\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Dawkins"
+                },
+                {
+                    "name": "Ori Pekelman",
+                    "email": "ori+github@pekelman.com"
+                }
+            ],
+            "description": "Small helper to access Platform.sh environment variables",
+            "time": "2015-11-20 11:33:07"
         },
         {
             "name": "predis/predis",

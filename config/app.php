@@ -1,19 +1,8 @@
 <?php
 
-if ($vars = getenv('PLATFORM_VARIABLES')){
-    $pltvars = json_decode(base64_decode($vars), TRUE);
-    foreach($pltvars as $k => $v) {
-        putenv("$k=$v");
-    }
-}
+$config = new Platformsh\LaravelHelper\Config();
 
-if ($env = getenv('PLATFORM_ENVIRONMENT')) {
-    if ($env === 'master') {
-        putenv("APP_ENV=production");
-    } else {
-        putenv("APP_ENV=development");
-    }
-}
+dd($config);
 
 return [
 
