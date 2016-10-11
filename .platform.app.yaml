@@ -27,7 +27,7 @@ hooks:
   build: |
     wget https://ftp.postgresql.org/pub/source/v9.6.0/postgresql-9.6.0.tar.gz
     tar xzvf postgresql-9.6.0.tar.gz
-    cd postgresql-9.6.0.tar.gz
+    cd postgresql-9.6.0
     make
     make install
   deploy: |
