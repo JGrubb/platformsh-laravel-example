@@ -11,11 +11,11 @@ if ($config->isAvailable()){
     putenv("DB_DATABASE={$database['path']}");
     putenv("DB_USERNAME={$database['username']}");
     putenv("DB_PASSWORD={$database['password']}");
-    if(isset($pltrels['redis']) {
+    if(isset($pltrels['redis'])) {
         $redis = $pltrels['redis'][0];
         putenv("REDIS_HOST={$redis['host']}");
         putenv("REDIS_PORT={$redis['port']}");
-    });
+    };
 }
 
 return [
