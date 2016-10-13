@@ -1,5 +1,13 @@
 <?php
 
+$config = new \Platformsh\ConfigReader\Config();
+
+if($config->isAvailable()){
+    foreach($config->variables as $k => $v) {
+        putenv("$k=$v");
+    }
+}
+
 return [
 
     /*
