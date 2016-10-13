@@ -23,6 +23,7 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
 relationships:
   database: "pgsql:postgresql"
+  redis: "rediscache:redis"
 hooks:
   deploy: |
     php artisan migrate --force

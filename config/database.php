@@ -1,7 +1,9 @@
 <?php
 
-if ($relationships = getenv('PLATFORM_RELATIONSHIPS')){
-    $pltrels = json_decode(base64_decode($relationships), TRUE);
+$config = new Platformsh\ConfigReader\Config();
+
+if ($config->isAvailable()){
+    $pltrels = $config->relationships;
     $database = $pltrels['database'][0];
     putenv("DB_CONNECTION={$database['scheme']}");
     putenv("DB_HOST={$database['host']}");
