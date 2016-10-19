@@ -27,17 +27,10 @@ relationships:
   redis: "rediscache:redis"
 hooks:
   build: |
-    wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.0.tar.gz
-    tar xzvf ncurses-6.0.tar.gz
-    cd ncurses-6.0
-    ./configure
-    make
-    make install
-    cd ~
     wget https://github.com/hishamhm/htop/archive/2.0.2.tar.gz
     tar xzvf 2.0.2.tar.gz
     cd htop-2.0.2
-    ./autogen.sh && ./configure && make
+    ./autogen.sh && ./configure --disable-unicode && make
     make install
   deploy: |
     php artisan migrate --force
