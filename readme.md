@@ -7,6 +7,5 @@ An example Laravel project demonstrating how to set up your project on [https://
 The gist of what you need to know to make your Laravel app run can be found in the following files - 
 
 - `composer.json` (we use the [https://github.com/platformsh/platformsh-php-helper](platformsh/config-reader) composer package to fetch configs)
-- `config/app.php`
-- `config/database.php`
-- `config/cache.php`
+- `config/app.php` - we fetch Platform variables here
+- `config/database.php` - we fetch Platform services config here
