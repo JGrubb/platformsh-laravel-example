@@ -1,6 +1,6 @@
 # Platform.sh Laravel Example
 
-An example Laravel project demonstrating how to set up your project on [https://platform.sh](Platform.sh).  This began as a bare bones application and is currently evolving into becoming a blog so I can learn a bit more about how Laravel works internally.
+An example Laravel project demonstrating how to set up your project on [Platform.sh](https://platform.sh).  This began as a bare bones application and is currently evolving into becoming a blog so I can learn a bit more about how Laravel works internally.
 
 ## Important stuff
 
