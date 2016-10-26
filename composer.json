@@ -11,7 +11,8 @@
         "platformsh/config-reader": "^0.0.1",
         "barryvdh/laravel-ide-helper": "^2.2",
         "barryvdh/laravel-debugbar": "^2.3",
-        "michelf/php-markdown": "^1.6"
+        "michelf/php-markdown": "^1.6",
+        "urodoz/truncate-html": "@stable"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

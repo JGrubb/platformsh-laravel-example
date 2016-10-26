@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Michelf\MarkdownExtra;
+use Urodoz\Truncate\TruncateService;
 
 class Post extends Model
 {
@@ -24,12 +25,11 @@ class Post extends Model
 
     public function getSummaryAttribute($value)
     {
-        $parser = new MarkdownExtra();
-        $parser->code_class_prefix = "language-";
         if (strlen($value)) {
-            return $parser->transform($value);
+            return $value;
         } else {
-            return str_limit($parser->transform($this->body), 500);
+            $truncate = new TruncateService();
+            return $truncate->truncate($this->body, 500);
         }
     }
 
