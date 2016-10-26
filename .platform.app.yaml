@@ -25,6 +25,15 @@ mounts:
 relationships:
   database: "pgsql:postgresql"
   redis: "rediscache:redis"
+
+dependencies:
+  ruby:
+    sass: "*"
+  nodejs:
+    gulp-cli: "*"
+
 hooks:
+  build: |
+
   deploy: |
     php artisan migrate --force

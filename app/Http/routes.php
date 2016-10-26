@@ -11,10 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['web']], function() {
+
+    Route::auth();
+
+    Route::get('/', 'HomeController@index');
+
+    Route::get('posts/{id}-{slug}', [
+        'as' => 'posts.show',
+        'uses' => 'PostsController@show'
+    ]);
+
+    Route::resource('posts', 'PostsController', ['except' => ['show']]);
+
+    Route::get('tags/{slug}', [
+        'as' => 'tags.show',
+        'uses' => 'TagsController@show'
+    ]);
+
+    Route::get('/home', 'HomeController@index');
 });
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
