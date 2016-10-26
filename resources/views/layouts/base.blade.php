@@ -44,12 +44,19 @@
             <div class="footer">
                 <div class="pure-menu pure-menu-horizontal">
                     <ul>
-                        {{--<li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About</a></li>--}}
                         <li class="pure-menu-item"><a href="{{ route('posts.index') }}" class="pure-menu-link">The blog archive</a></li>
                         <li class="pure-menu-item"><a href="http://twitter.com/johnnygrubb/" class="pure-menu-link">Twitter</a>
                         </li>
                         <li class="pure-menu-item"><a href="http://github.com/jgrubb/"
                                                       class="pure-menu-link">GitHub</a></li>
+                        @if(Auth::check())
+                            <li class="pure-menu-item"><a href="/logout"
+                                                          class="pure-menu-link">logout</a></li>
+                        @else
+                            <li class="pure-menu-item"><a href="/login"
+                                                          class="pure-menu-link">login</a></li>
+                        @endif
+
                     </ul>
                 </div>
             </div>
