@@ -34,6 +34,7 @@ dependencies:
 
 hooks:
   build: |
-
+    npm install
+    gulp default
   deploy: |
     php artisan migrate --force
