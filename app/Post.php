@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Michelf\MarkdownExtra;
@@ -14,6 +15,16 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(\App\Tag::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $this->getMutatedTimestampValue($value);
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $this->getMutatedTimestampValue($value);
     }
 
     public function getBodyAttribute($value)
@@ -49,6 +60,20 @@ class Post extends Model
             }
         });
         return $value;
+    }
+
+    public function published() {
+        $date = $this->getMutatedTimestampValue($this->pub_date);
+        return $date->toDayDateTimeString();
+    }
+
+    public function getMutatedTimestampValue($value)
+    {
+
+        $timezone = config('app.timezone');
+
+        return Carbon::parse($value)
+            ->timezone($timezone);
     }
 
 }

@@ -6,7 +6,7 @@
     @include('posts/_prev_next_buttons')
     <header class="post-header">
         <h2 class="post-title">{{ $post->title }}</h2>
-        <time>{{ $post->pub_date }}</time>
+        <time>{{ $post->published() }}</time>
         in @include('posts/_tags')
     </header>
 

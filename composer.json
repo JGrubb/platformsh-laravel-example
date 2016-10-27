@@ -12,7 +12,8 @@
         "barryvdh/laravel-ide-helper": "^2.2",
         "barryvdh/laravel-debugbar": "^2.3",
         "michelf/php-markdown": "^1.6",
-        "urodoz/truncate-html": "@stable"
+        "urodoz/truncate-html": "@stable",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
