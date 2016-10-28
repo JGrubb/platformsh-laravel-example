@@ -15,7 +15,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all()->sortByDesc('pub_date')->load('tags');
-        return view('posts/index')->withPosts($posts);
+        return view('posts/index')->with('posts', $posts);
     }
 
     /**
@@ -25,7 +25,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $post = new Post();
+        return view('posts/new')->with('post', $post);
     }
 
     /**
@@ -36,7 +37,11 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post($request->all());
+        $post->published = (isset($post->published)) ? true : false;
+//        $post->setFields($request->all());
+        $post->save();
+        redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
 
     /**

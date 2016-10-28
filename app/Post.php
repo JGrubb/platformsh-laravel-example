@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Requests\Request;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -11,6 +12,13 @@ use Urodoz\Truncate\TruncateService;
 class Post extends Model
 {
     protected $appends = ['prev', 'next'];
+    protected $fillable = [
+        'title',
+        'body',
+        'summary',
+        'pub_date',
+        'slug'
+    ];
 
     public function tags()
     {
@@ -74,6 +82,23 @@ class Post extends Model
 
         return Carbon::parse($value)
             ->timezone($timezone);
+    }
+
+    public function setFields($params) {
+        $this->title = $params['title'];
+        $this->body = $params['body'];
+        $this->summary = $params['summary'];
+        $this->pub_date = $params['pub_date'];
+        $this->published =
+        $this->slug = $this->createSlug($params);
+    }
+
+    protected function createSlug($params) {
+        if (isset($params['slug'])) {
+            return $params['slug'];
+        } else {
+            return str_slug($params['title']);
+        }
     }
 
 }
