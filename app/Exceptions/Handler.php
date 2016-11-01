@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
                             ->select('new_path')
                             ->where('old_path', '=', $request->getRequestUri())
                             ->first()) {
-                return redirect($redirect->new_path);
+                return redirect($redirect->new_path, 301);
             }
         }
         return parent::render($request, $e);
