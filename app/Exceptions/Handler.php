@@ -3,11 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +47,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        // Handles the old URL slugs, found in redirects table
+        if ($e instanceof NotFoundHttpException) {
+            if($redirect = DB::table('redirects')
+                            ->select('new_path')
+                            ->where('old_path', '=', $request->getRequestUri())
+                            ->first()) {
+                return redirect($redirect->new_path);
+            }
+        }
         return parent::render($request, $e);
     }
 }
