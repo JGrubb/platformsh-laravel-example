@@ -16,12 +16,13 @@ web:
       allow: true
       passthru: "/index.php"
 mounts:
-  "/storage/app/public": "shared:files/storage/app/public"
-  "/storage/framework/views": "shared:files/storage/framework/views"
-  "/storage/framework/sessions": "shared:files/storage/framework/sessions"
-  "/storage/framework/cache": "shared:files/storage/framework/cache"
+  "/storage/app/public": "shared:files/public"
+  "/storage/framework/views": "shared:files/views"
+  "/storage/framework/sessions": "shared:files/sessions"
+  "/storage/framework/cache": "shared:files/cache"
   "/storage/logs": "shared:files/logs"
   "/bootstrap/cache": "shared:files/bootstrap_cache"
+  "public/uploads": "shared:files/uploads"
 relationships:
   database: "pgsql:postgresql"
   redis: "rediscache:redis"
