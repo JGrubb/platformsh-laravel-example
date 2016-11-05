@@ -13,7 +13,8 @@
         "barryvdh/laravel-debugbar": "^2.3",
         "michelf/php-markdown": "^1.6",
         "urodoz/truncate-html": "@stable",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "laravelcollective/html": "^5.2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

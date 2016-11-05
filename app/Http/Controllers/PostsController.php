@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Carbon\Carbon;
+use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $this->middleware('auth', [
+            'except' => [
+                'index',
+                'show',
+            ]
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +27,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all()->sortByDesc('pub_date')->load('tags');
-        return view('posts/index')->withPosts($posts);
+        return view('posts/index')->with('posts', $posts);
     }
 
     /**
@@ -25,7 +37,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $post = new Post();
+        $post->pub_date = Carbon::now(config('app.timezone'));
+        return view('posts/new')->with('post', $post);
     }
 
     /**
@@ -36,7 +50,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post($request->all());
+        $post->published = (isset($post->published)) ? true : false;
+        $post->slug = str_slug($post->title);
+        $post->save();
+        $post->tags()->sync($request->all()['tags']);
+
+        return redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
 
     /**
@@ -63,7 +83,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->middleware('auth');
+        $post = Post::findOrFail($id)->load('tags');
+        return view('posts/edit')->with('post', $post);
     }
 
     /**
@@ -75,7 +97,10 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        $post->tags()->sync($request->all()['tags']);
+        return redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
 
     /**

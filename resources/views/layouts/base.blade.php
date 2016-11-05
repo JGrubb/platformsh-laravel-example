@@ -26,10 +26,7 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a class="pure-button" href="#">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="pure-button" href="#">New Post</a>
+                            {{ link_to_route('posts.create', 'New Post', null, ['class' => 'pure-button']) }}
                         </li>
                     </ul>
                 </nav>

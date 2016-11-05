@@ -13,7 +13,7 @@
                 </h2>
 
                 <p class="post-meta">
-                    <time>{{ $post->published() }}</time> in @include('posts/_tags')
+                    <time>{{ $post->published_at() }}</time> in @include('posts/_tags')
                 </p>
             </header>
 

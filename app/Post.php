@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Requests\Request;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -11,6 +12,13 @@ use Urodoz\Truncate\TruncateService;
 class Post extends Model
 {
     protected $appends = ['prev', 'next'];
+    protected $fillable = [
+        'title',
+        'body',
+        'summary',
+        'pub_date',
+        'slug'
+    ];
 
     public function tags()
     {
@@ -27,11 +35,17 @@ class Post extends Model
         return $this->getMutatedTimestampValue($value);
     }
 
-    public function getBodyAttribute($value)
-    {
+//    public function getBodyAttribute($value)
+//    {
+//        $parser = new MarkdownExtra();
+//        $parser->code_class_prefix = "language-";
+//        return $parser->transform($value);
+//    }
+
+    public function rendered_body() {
         $parser = new MarkdownExtra();
         $parser->code_class_prefix = "language-";
-        return $parser->transform($value);
+        return $parser->transform($this->body);
     }
 
     public function getSummaryAttribute($value)
@@ -40,7 +54,7 @@ class Post extends Model
             return $value;
         } else {
             $truncate = new TruncateService();
-            return $truncate->truncate($this->body, 500);
+            return $truncate->truncate($this->rendered_body(), 500);
         }
     }
 
@@ -62,7 +76,7 @@ class Post extends Model
         return $value;
     }
 
-    public function published() {
+    public function published_at() {
         $date = $this->getMutatedTimestampValue($this->pub_date);
         return $date->toDayDateTimeString();
     }
@@ -74,6 +88,23 @@ class Post extends Model
 
         return Carbon::parse($value)
             ->timezone($timezone);
+    }
+
+    public function setFields($params) {
+        $this->title = $params['title'];
+        $this->body = $params['body'];
+        $this->summary = $params['summary'];
+        $this->pub_date = $params['pub_date'];
+        $this->published =
+        $this->slug = $this->createSlug($params);
+    }
+
+    protected function createSlug($params) {
+        if (isset($params['slug'])) {
+            return $params['slug'];
+        } else {
+            return str_slug($params['title']);
+        }
     }
 
 }
