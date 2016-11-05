@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $this->middleware('auth', [
+            'except' => [
+                'index',
+                'show',
+            ]
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,9 +50,11 @@ class PostsController extends Controller
     {
         $post = new Post($request->all());
         $post->published = (isset($post->published)) ? true : false;
-//        $post->setFields($request->all());
+        $post->slug = str_slug($post->title);
         $post->save();
-        redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
+        $post->tags()->sync($request->all()['tags']);
+
+        return redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
 
     /**
@@ -68,7 +81,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->middleware('auth');
+        $post = Post::findOrFail($id)->load('tags');
+        return view('posts/edit')->with('post', $post);
     }
 
     /**
@@ -80,7 +95,10 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        $post->tags()->sync($request->all()['tags']);
+        return redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
 
     /**

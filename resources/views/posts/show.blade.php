@@ -6,12 +6,12 @@
     @include('posts/_prev_next_buttons')
     <header class="post-header">
         <h2 class="post-title">{{ $post->title }}</h2>
-        <time>{{ $post->published() }}</time>
+        <time>{{ $post->published_at() }}</time>
         in @include('posts/_tags')
     </header>
 
     <div class="post-description">
-        {!! $post->body !!}
+        {!! $post->rendered_body() !!}
 
         <div id="related">
             Related stuff here

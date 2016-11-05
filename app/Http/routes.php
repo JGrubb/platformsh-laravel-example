@@ -22,7 +22,7 @@ Route::group(['middleware' => ['web']], function() {
         'uses' => 'PostsController@show'
     ]);
 
-    Route::resource('posts', 'PostsController', ['except' => ['show']]);
+    Route::resource('posts', 'PostsController', ['except' => ['show'], 'middleware' => ['auth']]);
 
     Route::get('tags/{slug}', [
         'as' => 'tags.show',
