@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Carbon\Carbon;
 use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,7 @@ class PostsController extends Controller
     public function create()
     {
         $post = new Post();
+        $post->pub_date = Carbon::now(config('app.timezone'));
         return view('posts/new')->with('post', $post);
     }
 
