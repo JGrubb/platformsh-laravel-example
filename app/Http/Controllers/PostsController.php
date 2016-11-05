@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
@@ -37,9 +38,10 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
         $post = new Post();
         $post->pub_date = Carbon::now(config('app.timezone'));
-        return view('posts/new')->with('post', $post);
+        return view('posts/new')->with(['post' => $post, 'tags' => $tags]);
     }
 
     /**
@@ -83,9 +85,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $this->middleware('auth');
-        $post = Post::findOrFail($id)->load('tags');
-        return view('posts/edit')->with('post', $post);
+        $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
+        $post = Post::findOrFail($id);
+        return view('posts/edit')->with(['post' => $post, 'tags' => $tags]);
     }
 
     /**

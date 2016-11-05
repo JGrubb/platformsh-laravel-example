@@ -9,7 +9,10 @@
             <header class="post-header">
 
                 <h2 class="post-title">
-                    <a href="{{ route('posts.show', ['id' => $post->id, 'slug' => $post->slug]) }}">{{ $post->title }}</a>
+                    <a href="{{ route('posts.show',
+                        ['id' => $post->id, 'slug' => $post->slug]) }}">
+                            {{ $post->title }}
+                    </a>
                 </h2>
 
                 <p class="post-meta">

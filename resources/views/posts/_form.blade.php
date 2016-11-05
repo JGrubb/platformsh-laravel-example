@@ -9,7 +9,7 @@
 
 {!! Form::label('tags[]', 'Tags') !!}
 {!! Form::select('tags[]',
-    \App\Tag::all()->pluck('name', 'id'),
+    $tags,
     $post->tags->pluck('id')->toArray(),
     ['multiple' => true, 'class' => 'pure-u-1-3']) !!}
 
