@@ -10,6 +10,7 @@
                 'class' => 'pure-form pure-form-stacked'
             ]) !!}
             @include('posts/_form')
+            {!! link_to_route('posts.show', 'Back to post', ['id' => $post->id, 'slug' => $post->slug]) !!}
         {!! Form::close() !!}
     </section>
 @endsection
