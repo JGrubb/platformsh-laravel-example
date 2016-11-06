@@ -22,7 +22,7 @@
 {!! Form::submit('Save', ['class' => 'pure-button pure-button-primary']) !!}
 
 <ul>
-    @foreach(($errors->all() as $error))
+    @foreach($errors->all() as $error)
         <li>{{ $error }}</li>
     @endforeach
 </ul>
