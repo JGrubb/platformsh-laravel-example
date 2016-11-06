@@ -17,7 +17,6 @@ class Post extends Model
         'body',
         'summary',
         'pub_date',
-        'slug'
     ];
 
     public function tags()
@@ -35,26 +34,28 @@ class Post extends Model
         return $this->getMutatedTimestampValue($value);
     }
 
-//    public function getBodyAttribute($value)
-//    {
-//        $parser = new MarkdownExtra();
-//        $parser->code_class_prefix = "language-";
-//        return $parser->transform($value);
-//    }
-
-    public function rendered_body() {
+    public function getRenderedBodyAttribute() {
         $parser = new MarkdownExtra();
         $parser->code_class_prefix = "language-";
         return $parser->transform($this->body);
     }
 
-    public function getSummaryAttribute($value)
+    public function getRenderedSummaryAttribute($value)
     {
         if (strlen($value)) {
             return $value;
         } else {
             $truncate = new TruncateService();
-            return $truncate->truncate($this->rendered_body(), 500);
+            return $truncate->truncate($this->renderedBody, 500);
+        }
+    }
+
+    public function getTruncatedSummaryAttribute() {
+        if (strlen($this->summary)) {
+            return $this->summary;
+        } else {
+            $truncate = new TruncateService();
+            return $truncate->truncate($this->body, 500);
         }
     }
 

@@ -8,7 +8,7 @@
     <link rel="canonical" href="">
     <link rel="shortcut icon" href="/static/favicon.png">
 
-    <title>Ignored By Dinosaurs</title>
+    <title>{{"$post->title | Ignored By Dinosaurs" or "Ignored By Dinosaurs"}}</title>
     <link rel="stylesheet" href="/css/app.css">
     <!--<![endif]-->
     <meta name="google-site-verification" content="mqU68T9C-c95bcf99Chl1-PqfKkKd1BvG2pDmzNQI_Q" />

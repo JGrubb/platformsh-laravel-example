@@ -1,4 +1,4 @@
-@extends("layouts/base")
+@extends("layouts/base", ['description' => $post->truncatedSummary,'title' => $post->title])
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </header>
 
     <div class="post-description">
-        {!! $post->rendered_body() !!}
+        {!! $post->renderedBody !!}
 
         <div id="related">
             Related stuff here
