@@ -35,12 +35,6 @@ class Post extends Model
         return $this->getMutatedTimestampValue($value);
     }
 
-//    public function getBodyAttribute($value)
-//    {
-//        $parser = new MarkdownExtra();
-//        $parser->code_class_prefix = "language-";
-//        return $parser->transform($value);
-//    }
 
     public function rendered_body() {
         $parser = new MarkdownExtra();
