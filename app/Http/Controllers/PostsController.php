@@ -27,7 +27,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->sortByDesc('pub_date')->load('tags');
+        $posts = Post::all()->where('published', true)->sortByDesc('pub_date')->load('tags');
         return view('posts/index')->with('posts', $posts);
     }
 
