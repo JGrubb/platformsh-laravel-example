@@ -7,6 +7,7 @@ use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -73,6 +74,9 @@ class PostsController extends Controller
         if($slug !== $post->slug) {
             return redirect()
                 ->route('posts.show', ['id' => $id, 'slug' => $post->slug]);
+        }
+        if(!$post->published && !Auth::check()) {
+            return redirect('/login');
         }
         return view('posts/show')->withPost($post);
     }
