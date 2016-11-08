@@ -91,7 +91,6 @@ class PostsController extends Controller
     {
         $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
         $post = Post::findOrFail($id);
-//        dd($post);
         return view('posts/edit')->with(['post' => $post, 'tags' => $tags]);
     }
 
@@ -120,5 +119,10 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function unpublished() {
+        $posts = Post::all()->where('published', false)->sortByDesc('created_at');
+        return view('posts.index')->with('posts', $posts);
     }
 }
