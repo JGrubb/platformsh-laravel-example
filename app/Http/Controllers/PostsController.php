@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
-use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
