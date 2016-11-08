@@ -1,3 +1,4 @@
+{!! Form::hidden('published', 0) !!}
 {!! Form::label('title', 'Title') !!}
 {!! Form::text('title', null, ['class' => 'pure-u-1-2']) !!}
 
