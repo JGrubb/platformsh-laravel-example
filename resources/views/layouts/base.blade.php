@@ -47,8 +47,13 @@
                         <li class="pure-menu-item"><a href="http://github.com/jgrubb/"
                                                       class="pure-menu-link">GitHub</a></li>
                         @if(Auth::check())
-                            <li class="pure-menu-item"><a href="/logout"
-                                                          class="pure-menu-link">logout</a></li>
+                            <li class="pure-menu-item">
+                                {!! Form::open([
+                                    'route' => 'logout',
+                                    'method' => 'POST']) !!}
+                                    <button class="pure-button">Logout</button>
+                                {!! Form::close() !!}
+                            </li>
                         @else
                             <li class="pure-menu-item"><a href="/login"
                                                           class="pure-menu-link">login</a></li>

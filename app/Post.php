@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Http\Requests\Request;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -15,7 +14,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
-        'summary',
+        'published',
         'pub_date',
     ];
 
@@ -34,7 +33,8 @@ class Post extends Model
         return $this->getMutatedTimestampValue($value);
     }
 
-    public function getRenderedBodyAttribute() {
+    public function rendered_body()
+    {
         $parser = new MarkdownExtra();
         $parser->code_class_prefix = "language-";
         return $parser->transform($this->body);
@@ -59,25 +59,28 @@ class Post extends Model
         }
     }
 
-    public function getPrevAttribute() {
-        if(isset($this->previous_id)) {
-            $value = Cache::remember("previous:{$this->id}", 1, function() {
+    public function getPrevAttribute()
+    {
+        if (isset($this->previous_id)) {
+            $value = Cache::remember("previous:{$this->id}", 1, function () {
                 return Post::find($this->previous_id);
             });
             return $value;
         }
     }
 
-    public function getNextAttribute() {
-        $value = Cache::remember("next:{$this->id}", 1, function() {
-            if($post = Post::where('previous_id', '=', $this->id)->first()) {
+    public function getNextAttribute()
+    {
+        $value = Cache::remember("next:{$this->id}", 1, function () {
+            if ($post = Post::where('previous_id', '=', $this->id)->first()) {
                 return $post;
             }
         });
         return $value;
     }
 
-    public function published_at() {
+    public function published_at()
+    {
         $date = $this->getMutatedTimestampValue($this->pub_date);
         return $date->toDayDateTimeString();
     }
@@ -91,16 +94,8 @@ class Post extends Model
             ->timezone($timezone);
     }
 
-    public function setFields($params) {
-        $this->title = $params['title'];
-        $this->body = $params['body'];
-        $this->summary = $params['summary'];
-        $this->pub_date = $params['pub_date'];
-        $this->published =
-        $this->slug = $this->createSlug($params);
-    }
-
-    protected function createSlug($params) {
+    protected function createSlug($params)
+    {
         if (isset($params['slug'])) {
             return $params['slug'];
         } else {
