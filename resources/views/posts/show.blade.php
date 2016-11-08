@@ -1,4 +1,4 @@
-@extends("layouts/base", ['description' => $post->truncatedSummary,'title' => $post->title])
+@extends("layouts/base", ['description' => $post->truncatedSummary, 'title' => $post->title])
 
 @section('content')
 

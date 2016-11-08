@@ -33,7 +33,7 @@ class Post extends Model
         return $this->getMutatedTimestampValue($value);
     }
 
-    public function rendered_body()
+    public function getRenderedBodyAttribute()
     {
         $parser = new MarkdownExtra();
         $parser->code_class_prefix = "language-";
