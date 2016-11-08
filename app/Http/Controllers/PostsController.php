@@ -91,6 +91,7 @@ class PostsController extends Controller
     {
         $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
         $post = Post::findOrFail($id);
+//        dd($post);
         return view('posts/edit')->with(['post' => $post, 'tags' => $tags]);
     }
 
@@ -104,7 +105,8 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        $post->update($request->all());
+        $params = $request->all();
+        $post->update($params);
         $post->tags()->sync($request->all()['tags']);
         return redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
