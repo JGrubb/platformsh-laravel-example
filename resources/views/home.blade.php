@@ -1,4 +1,4 @@
-@extends('layouts/base')
+@extends('layouts/base', ['title' => 'Welcome!'])
 
 @section('intro')
     <div class="posts">

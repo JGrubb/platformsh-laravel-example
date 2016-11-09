@@ -9,10 +9,10 @@
             <header class="post-header">
 
                 <h2 class="post-title">
-                    <a href="{{ route('posts.show',
-                        ['id' => $post->id, 'slug' => $post->slug]) }}">
-                            {{ $post->title }}
-                    </a>
+                    {!! link_to_route('posts.show',
+                            $post->title,
+                            ['id' => $post->id, 'slug' => $post->slug])
+                    !!}
                 </h2>
 
                 <p class="post-meta">
@@ -22,7 +22,7 @@
 
             <div class="post-description">
                 <p>
-                    {!! $post->summary !!}
+                    {!! $post->renderedSummary !!}
                 </p>
             </div>
         </section>

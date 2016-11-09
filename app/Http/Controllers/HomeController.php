@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->sortByDesc('pub_date')
+        $posts = Post::all()->where('published', true)
+            ->sortByDesc('pub_date')
             ->take(5)
             ->load('tags');
         return view('home')->with('posts', $posts);
