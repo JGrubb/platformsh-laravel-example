@@ -24,8 +24,8 @@ mounts:
   "/bootstrap/cache": "shared:files/bootstrap_cache"
   "public/uploads": "shared:files/uploads"
 relationships:
-  database: "pgsql:postgresql"
-  db2: "pgsql96:postgresql"
+  database: "pgsql96:postgresql"
+#  db2: "pgsql96:postgresql"
   redis: "rediscache:redis"
 
 dependencies:
