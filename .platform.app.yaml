@@ -25,6 +25,7 @@ mounts:
   "public/uploads": "shared:files/uploads"
 relationships:
   database: "pgsql:postgresql"
+  db2: "pgsql96:postgresql"
   redis: "rediscache:redis"
 
 dependencies:
