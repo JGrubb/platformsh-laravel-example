@@ -25,6 +25,7 @@ mounts:
   "public/uploads": "shared:files/uploads"
 relationships:
   database: "pgsql:postgresql"
+  db2: "pgsql96:postgresql"
   redis: "rediscache:redis"
 
 dependencies:
@@ -32,10 +33,11 @@ dependencies:
     sass: "*"
   nodejs:
     gulp-cli: "*"
+    yarn: "*"
 
 hooks:
   build: |
-    npm install
+    yarn install
     gulp default
   deploy: |
     php artisan migrate --force
