@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use Carbon\Carbon;
-use Illuminate\Html\FormFacade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -26,7 +27,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->sortByDesc('pub_date')->load('tags');
+        $posts = Post::all()->where('published', true)->sortByDesc('pub_date')->load('tags');
         return view('posts/index')->with('posts', $posts);
     }
 
@@ -37,9 +38,10 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
         $post = new Post();
         $post->pub_date = Carbon::now(config('app.timezone'));
-        return view('posts/new')->with('post', $post);
+        return view('posts/new')->with(['post' => $post, 'tags' => $tags]);
     }
 
     /**
@@ -72,6 +74,9 @@ class PostsController extends Controller
             return redirect()
                 ->route('posts.show', ['id' => $id, 'slug' => $post->slug]);
         }
+        if(!$post->published && !Auth::check()) {
+            return redirect('/login');
+        }
         return view('posts/show')->withPost($post);
     }
 
@@ -83,9 +88,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $this->middleware('auth');
-        $post = Post::findOrFail($id)->load('tags');
-        return view('posts/edit')->with('post', $post);
+        $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
+        $post = Post::findOrFail($id);
+        return view('posts/edit')->with(['post' => $post, 'tags' => $tags]);
     }
 
     /**
@@ -98,7 +103,8 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        $post->update($request->all());
+        $params = $request->all();
+        $post->update($params);
         $post->tags()->sync($request->all()['tags']);
         return redirect(route('posts.show', ['id' => $post->id, 'slug' => $post->slug]));
     }
@@ -112,5 +118,10 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function unpublished() {
+        $posts = Post::all()->where('published', false)->sortByDesc('created_at');
+        return view('posts.index')->with('posts', $posts);
     }
 }

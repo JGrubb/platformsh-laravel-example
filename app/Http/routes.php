@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web']], function() {
     ]);
 
     Route::resource('posts', 'PostsController', ['except' => ['show'], 'middleware' => ['auth']]);
+    Route::get('posts/unpublished', 'PostsController@unpublished');
 
     Route::get('tags/{slug}', [
         'as' => 'tags.show',

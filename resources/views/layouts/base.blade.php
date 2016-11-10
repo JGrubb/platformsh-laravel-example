@@ -7,11 +7,17 @@
     <link rel="alternate" type="application/rss+xml" title="IBD RSS" href="/posts/rss.xml"/>
     <link rel="canonical" href="">
     <link rel="shortcut icon" href="/static/favicon.png">
-
-    <title>Ignored By Dinosaurs</title>
+    @if(isset($title))
+        <title>{{"$title | Ignored By Dinosaurs"}}</title>
+    @else
+        <title>Ignored By Dinosaurs</title>
+    @endif
+    @if(isset($description))
+    <meta name="description" content="{{ $description }}">
+    @endif
     <link rel="stylesheet" href="/css/app.css">
     <!--<![endif]-->
-    <meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI"/>
+    <meta name="google-site-verification" content="mqU68T9C-c95bcf99Chl1-PqfKkKd1BvG2pDmzNQI_Q" />
     <meta property="fb:pages" content="1024603974292271" />
 </head>
 <body>
@@ -47,8 +53,13 @@
                         <li class="pure-menu-item"><a href="http://github.com/jgrubb/"
                                                       class="pure-menu-link">GitHub</a></li>
                         @if(Auth::check())
-                            <li class="pure-menu-item"><a href="/logout"
-                                                          class="pure-menu-link">logout</a></li>
+                            <li class="pure-menu-item">
+                                {!! Form::open([
+                                    'route' => 'logout',
+                                    'method' => 'POST']) !!}
+                                    <button class="pure-button">Logout</button>
+                                {!! Form::close() !!}
+                            </li>
                         @else
                             <li class="pure-menu-item"><a href="/login"
                                                           class="pure-menu-link">login</a></li>
