@@ -31,6 +31,7 @@ Route::group(['middleware' => ['web']], function() {
         'as' => 'tags.show',
         'uses' => 'TagsController@show'
     ]);
+    Route::get('tags/{slug}/rss.xml', 'FeedsController@tags');
 
     Route::get('/home', 'HomeController@index');
 
