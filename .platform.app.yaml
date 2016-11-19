@@ -16,12 +16,12 @@ web:
       allow: true
       passthru: "/index.php"
 mounts:
-  "/storage/app/public": "shared:files/public"
-  "/storage/framework/views": "shared:files/views"
-  "/storage/framework/sessions": "shared:files/sessions"
-  "/storage/framework/cache": "shared:files/cache"
-  "/storage/logs": "shared:files/logs"
-  "/bootstrap/cache": "shared:files/bootstrap_cache"
+  "storage/app/public": "shared:files/public"
+  "storage/framework/views": "shared:files/views"
+  "storage/framework/sessions": "shared:files/sessions"
+  "storage/framework/cache": "shared:files/cache"
+  "storage/logs": "shared:files/logs"
+  "bootstrap/cache": "shared:files/bootstrap_cache"
   "public/uploads": "shared:files/uploads"
 relationships:
   database: "pgsql96:postgresql"
@@ -34,7 +34,6 @@ dependencies:
   nodejs:
     gulp-cli: "*"
     yarn: "*"
-
 hooks:
   build: |
     yarn install
