@@ -12,7 +12,9 @@ class TagsController extends Controller
 {
     public function show($slug) {
         $tag = Tag::where('slug', $slug)->first()->load('posts');
-        $posts = $tag->posts->sortByDesc('pub_date')->load('tags');
+        $posts = $tag->posts->sortByDesc('pub_date')
+            ->where('published', true)
+            ->load('tags');
         return view('posts/tags_index')->with(['posts' => $posts, 'tag' => $tag]);
     }
 }

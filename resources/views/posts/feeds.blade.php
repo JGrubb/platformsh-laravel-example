@@ -9,7 +9,7 @@
             <title>{{ $post->title }}</title>
             <link>{{ route('posts.show', ['id' => $post->id,
                 'slug' => $post->slug]) }}</link>
-            <description>{!! $post->renderedSummary !!}</description>
+            <description>{{ $post->renderedSummary }}</description>
         </item>
         @endforeach
     </channel>
