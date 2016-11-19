@@ -41,5 +41,4 @@
 
 @section('content')
     @include('posts/index')
-    <a class="pure-button pure-button-primary" href="#">The blog archive -></a>
 @endsection
