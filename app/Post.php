@@ -85,6 +85,11 @@ class Post extends Model
         return $date->toDayDateTimeString();
     }
 
+    public function getRssPubDateAttribute() {
+        $date = $this->getMutatedTimestampValue($this->pub_date);
+        return $date->format('r');
+    }
+
     public function getMutatedTimestampValue($value)
     {
 

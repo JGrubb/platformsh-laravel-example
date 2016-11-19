@@ -10,6 +10,7 @@
             <link>{{ route('posts.show', ['id' => $post->id,
                 'slug' => $post->slug]) }}</link>
             <description>{{ $post->renderedSummary }}</description>
+            <pubDate>{{ $post->rssPubDate }}</pubDate>
         </item>
         @endforeach
     </channel>
