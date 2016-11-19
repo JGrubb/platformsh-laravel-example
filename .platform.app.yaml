@@ -39,5 +39,7 @@ hooks:
   build: |
     yarn install
     gulp default
+    gzip -k public/js/all.js
+    gzip -k public/css/app.css
   deploy: |
     php artisan migrate --force
