@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <link rel="alternate" type="application/rss+xml" title="IBD RSS" href="/posts/rss.xml"/>
+    <link rel="alternate" type="application/rss+xml" title="Ignored By Dinosaurs RSS" href="/posts/rss.xml"/>
     <link rel="canonical" href="">
     <link rel="shortcut icon" href="/static/favicon.png">
     @if(isset($title))
