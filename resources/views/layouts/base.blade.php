@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <link rel="alternate" type="application/rss+xml" title="Ignored By Dinosaurs RSS" href="/posts/rss.xml"/>
+    @if(isset($tag))
+        <link rel="alternate" type="application/rss+xml" title="{{ "Ignored By Dinosaurs {$tag->name} category feed" }}" href="{{ url("tags/{$tag->slug}/rss.xml") }}"/>
+    @else
+    <link rel="alternate" type="application/rss+xml" title="Ignored By Dinosaurs RSS" href="{{ url('/posts/rss.xml') }}"/>
+    @endif
     <link rel="canonical" href="">
     <link rel="shortcut icon" href="/static/favicon.png">
     @if(isset($title))
