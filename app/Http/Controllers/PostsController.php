@@ -67,7 +67,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $slug)
+    public function show(int $id, string $slug)
     {
         $post = Post::find($id)->load('tags');
         if($slug !== $post->slug) {
@@ -86,7 +86,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $tags = Tag::all()->sortBy('name')->pluck('name', 'id');
         $post = Post::findOrFail($id);
