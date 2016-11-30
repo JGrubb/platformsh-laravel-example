@@ -2,9 +2,5 @@ pgsql96:
   type: postgresql:9.6
   disk: 512
 
-pgsql96:
-  type: postgresql:9.6
-  disk: 512
-
 rediscache:
     type: redis:3.0
