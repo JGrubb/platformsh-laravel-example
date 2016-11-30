@@ -39,7 +39,10 @@ Route::group(['middleware' => ['web']], function() {
     Route::get('sitemap.xml', function() {
         $posts = \App\Post::all()->sortByDesc('pub_date');
         $tags = \App\Tag::all()->sortBy('name');
-        return view('sitemap')->with(['posts' => $posts, 'tags' => $tags]);
+        $content = view('sitemap')->with(['posts' => $posts, 'tags' => $tags]);
+        return response($content)->withHeaders([
+            'content-type' => 'text/xml'
+        ]);
     });
 
 });
