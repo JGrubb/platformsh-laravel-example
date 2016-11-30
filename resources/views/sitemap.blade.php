@@ -3,7 +3,7 @@
     @foreach($posts as $post)
         <url>
             <loc>{{ route('posts.show', ['id' => $post->id, 'slug' => $post->slug]) }}</loc>
-            <lastmod>{{ $post->updated_at }}</lastmod>
+            <lastmod>{{ $post->xmlSitemapDate }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
         </url>
