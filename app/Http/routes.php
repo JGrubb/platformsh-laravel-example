@@ -21,10 +21,8 @@ Route::group(['middleware' => ['web']], function() {
         'as' => 'posts.show',
         'uses' => 'PostsController@show'
     ]);
-
     Route::resource('posts', 'PostsController', ['except' => ['show'], 'middleware' => ['auth']]);
     Route::get('posts/unpublished', 'PostsController@unpublished');
-
     Route::get('posts/rss.xml', 'FeedsController@index');
 
     Route::get('tags/{slug}', [
@@ -33,6 +31,15 @@ Route::group(['middleware' => ['web']], function() {
     ]);
     Route::get('tags/{slug}/rss.xml', 'FeedsController@tags');
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('links', 'LinksController@index');
+    Route::get('links/create', 'LinksController@create');
+    Route::post('links', 'Linkscontroller@store');
+    Route::delete('links', 'LinksController@delete');
+
+    Route::get('sitemap.xml', function() {
+        $posts = \App\Post::all()->sortByDesc('pub_date');
+        $tags = \App\Tag::all()->sortBy('name');
+        return view('sitemap')->with(['posts' => $posts, 'tags' => $tags]);
+    });
 
 });
