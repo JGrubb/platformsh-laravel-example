@@ -37,7 +37,7 @@ dependencies:
     yarn: "*"
 hooks:
   build: |
-    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar
+    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -xv
     yarn install
     gulp default
     gzip -k public/js/all.js
