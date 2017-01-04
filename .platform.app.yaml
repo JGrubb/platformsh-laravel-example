@@ -19,6 +19,7 @@ web:
       root: "Dropbox/ibd_website_images"
       passthru: false
       allow: true
+      scripts: false
 mounts:
   "storage/app/public": "shared:files/public"
   "storage/framework/views": "shared:files/views"
@@ -46,5 +47,5 @@ hooks:
     gzip -k public/css/app.css
     wget "https://www.dropbox.com/download?plat=lnx.x86_64" -O archive.tar && tar xzvf archive.tar && rm archive.tar
   deploy: |
-    nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
+    # nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
     php artisan migrate --force
