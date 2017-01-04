@@ -28,7 +28,6 @@ mounts:
 relationships:
   database: "pgsql96:postgresql"
   redis: "rediscache:redis"
-
 dependencies:
   ruby:
     sass: "*"
