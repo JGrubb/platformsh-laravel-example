@@ -15,6 +15,9 @@ web:
         - index.php
       allow: true
       passthru: "/index.php"
+    "/uploads":
+      root: "Dropbox/ibd_website_images"
+      passthru: false
 mounts:
   "storage/app/public": "shared:files/public"
   "storage/framework/views": "shared:files/views"
