@@ -18,6 +18,7 @@ web:
     "/uploads":
       root: "Dropbox/ibd_website_images"
       passthru: false
+      allow: true
 mounts:
   "storage/app/public": "shared:files/public"
   "storage/framework/views": "shared:files/views"
