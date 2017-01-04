@@ -90,6 +90,11 @@ class Post extends Model
         return $date->format('r');
     }
 
+    public function getXmlSitemapDateAttribute() {
+        $date = $this->getMutatedTimestampValue($this->updated_at);
+        return $date->format('Y-m-d');
+    }
+
     public function getMutatedTimestampValue($value)
     {
 
