@@ -6,7 +6,7 @@ runtime:
     - redis
 build:
   flavor: composer
-disk: 4096
+disk: 4000
 web:
   locations:
     "/":
@@ -37,10 +37,10 @@ dependencies:
     yarn: "*"
 hooks:
   build: |
-    wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar
     yarn install
     gulp default
     gzip -k public/js/all.js
     gzip -k public/css/app.css
+    wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar
   deploy: |
     php artisan migrate --force
