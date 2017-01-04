@@ -40,6 +40,7 @@ hooks:
     gulp default
     gzip -k public/js/all.js
     gzip -k public/css/app.css
-    wget "https://www.dropbox.com/download?plat=lnx.x86_64" -O archive.tar && tar xzvf archive.tar
+    wget "https://www.dropbox.com/download?plat=lnx.x86_64" -O archive.tar && tar xzvf archive.tar && rm archive.tar
   deploy: |
-    php artisan migrate --force
+    ~/.dropbox-dist/dropboxd
+    nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
