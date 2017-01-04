@@ -23,6 +23,8 @@ mounts:
   "storage/logs": "shared:files/logs"
   "bootstrap/cache": "shared:files/bootstrap_cache"
   "public/uploads": "shared:files/uploads"
+  "Dropbox": "shared:files/dropbox"
+  ".dropbox": "shared:files/dropbox-meta"
 relationships:
   database: "pgsql96:postgresql"
 #  db2: "pgsql96:postgresql"
@@ -36,6 +38,7 @@ dependencies:
     yarn: "*"
 hooks:
   build: |
+    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar
     yarn install
     gulp default
     gzip -k public/js/all.js
