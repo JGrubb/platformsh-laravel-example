@@ -36,6 +36,7 @@ dependencies:
     yarn: "*"
 hooks:
   build: |
+    set -e
     yarn install
     gulp default
     gzip -k public/js/all.js
