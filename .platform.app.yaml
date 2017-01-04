@@ -6,7 +6,7 @@ runtime:
     - redis
 build:
   flavor: composer
-disk: 2048
+disk: 4096
 web:
   locations:
     "/":
