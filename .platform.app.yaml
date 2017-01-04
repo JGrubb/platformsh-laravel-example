@@ -6,7 +6,7 @@ runtime:
     - redis
 build:
   flavor: composer
-disk: 2048
+disk: 4000
 web:
   locations:
     "/":
@@ -15,6 +15,11 @@ web:
         - index.php
       allow: true
       passthru: "/index.php"
+    "/uploads":
+      root: "Dropbox/ibd_website_images"
+      passthru: false
+      allow: true
+      scripts: false
 mounts:
   "storage/app/public": "shared:files/public"
   "storage/framework/views": "shared:files/views"
@@ -23,11 +28,11 @@ mounts:
   "storage/logs": "shared:files/logs"
   "bootstrap/cache": "shared:files/bootstrap_cache"
   "public/uploads": "shared:files/uploads"
+  "Dropbox": "shared:files/dropbox"
+  ".dropbox": "shared:files/dropbox-meta"
 relationships:
   database: "pgsql96:postgresql"
-#  db2: "pgsql96:postgresql"
   redis: "rediscache:redis"
-
 dependencies:
   ruby:
     sass: "*"
@@ -40,5 +45,7 @@ hooks:
     gulp default
     gzip -k public/js/all.js
     gzip -k public/css/app.css
+    wget "https://www.dropbox.com/download?plat=lnx.x86_64" -O archive.tar && tar xzvf archive.tar && rm archive.tar
   deploy: |
+    # nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
     php artisan migrate --force
