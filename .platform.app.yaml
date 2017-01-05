@@ -27,7 +27,7 @@ mounts:
   "storage/framework/cache": "shared:files/cache"
   "storage/logs": "shared:files/logs"
   "bootstrap/cache": "shared:files/bootstrap_cache"
-  "public/uploads": "shared:files/uploads"
+  # "public/uploads": "shared:files/uploads"
   "Dropbox": "shared:files/dropbox"
   ".dropbox": "shared:files/dropbox-meta"
 relationships:
