@@ -10,7 +10,7 @@ disk: 4000
 web:
   commands:
     start: |
-      nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
+      ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
       /usr/sbin/php-fpm7.0
   locations:
     "/":
