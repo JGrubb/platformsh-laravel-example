@@ -8,6 +8,10 @@ build:
   flavor: composer
 disk: 4000
 web:
+  commands:
+    start: |
+      nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
+      /usr/sbin/php-fpm7.0
   locations:
     "/":
       root: "public"
@@ -27,7 +31,6 @@ mounts:
   "storage/framework/cache": "shared:files/cache"
   "storage/logs": "shared:files/logs"
   "bootstrap/cache": "shared:files/bootstrap_cache"
-  # "public/uploads": "shared:files/uploads"
   "Dropbox": "shared:files/dropbox"
   ".dropbox": "shared:files/dropbox-meta"
 relationships:
