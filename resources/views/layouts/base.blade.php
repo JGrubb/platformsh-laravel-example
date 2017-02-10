@@ -4,14 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <link rel="alternate" type="application/rss+xml" title="IBD RSS" href="/posts/rss.xml"/>
+    @if(isset($tag))
+        <link rel="alternate" type="application/rss+xml" title="{{ "Ignored By Dinosaurs {$tag->name} category feed" }}" href="{{ url("tags/{$tag->slug}/rss.xml") }}"/>
+    @else
+    <link rel="alternate" type="application/rss+xml" title="Ignored By Dinosaurs RSS" href="{{ url('/posts/rss.xml') }}"/>
+    @endif
     <link rel="canonical" href="">
     <link rel="shortcut icon" href="/static/favicon.png">
-
-    <title>Ignored By Dinosaurs</title>
+    @if(isset($title))
+        <title>{{"$title | Ignored By Dinosaurs"}}</title>
+    @else
+        <title>Ignored By Dinosaurs</title>
+    @endif
+    @if(isset($description))
+    <meta name="description" content="{{ $description }}">
+    @endif
     <link rel="stylesheet" href="/css/app.css">
     <!--<![endif]-->
-    <meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI"/>
+    <meta name="google-site-verification" content="ZW3GBpFJ0aC-Xr6n__YokO1Yy_Mba3osaM0bOfGhGVI" />
     <meta property="fb:pages" content="1024603974292271" />
 </head>
 <body>
@@ -26,10 +36,7 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a class="pure-button" href="#">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="pure-button" href="#">New Post</a>
+                            {{ link_to_route('posts.create', 'New Post', null, ['class' => 'pure-button']) }}
                         </li>
                     </ul>
                 </nav>
@@ -44,12 +51,24 @@
             <div class="footer">
                 <div class="pure-menu pure-menu-horizontal">
                     <ul>
-                        {{--<li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About</a></li>--}}
                         <li class="pure-menu-item"><a href="{{ route('posts.index') }}" class="pure-menu-link">The blog archive</a></li>
                         <li class="pure-menu-item"><a href="http://twitter.com/johnnygrubb/" class="pure-menu-link">Twitter</a>
                         </li>
                         <li class="pure-menu-item"><a href="http://github.com/jgrubb/"
                                                       class="pure-menu-link">GitHub</a></li>
+                        @if(Auth::check())
+                            <li class="pure-menu-item">
+                                {!! Form::open([
+                                    'route' => 'logout',
+                                    'method' => 'POST']) !!}
+                                    <button class="pure-button">Logout</button>
+                                {!! Form::close() !!}
+                            </li>
+                        @else
+                            <li class="pure-menu-item"><a href="/login"
+                                                          class="pure-menu-link">login</a></li>
+                        @endif
+
                     </ul>
                 </div>
             </div>

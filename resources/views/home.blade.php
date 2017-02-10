@@ -1,8 +1,9 @@
-@extends('layouts/base')
+@extends('layouts/base', ['title' => 'Welcome!'])
 
 @section('intro')
     <div class="posts">
         <h1 class="content-subhead">About this</h1>
+        <a style="float: right" rel="alternate" type="application/rss+xml" href="{{ url('posts/rss.xml') }}"><img src="{{ url('img/feed-icon-28x28.png') }}" alt=""></a>
 
         <!-- A single blog post -->
         <section class="post">
@@ -25,13 +26,13 @@
                     technologies - Drupal, Rails,
                     Linux, AWS.
                     <a href="https://www.linkedin.com/in/johnnygrubb">My LinkedIn resume is here.</a> I still think and
-                    occasionally write about the music business and other personal things but I think
-                    it's about to turn into a blog about learning Python for web and doing "data stuff".
+                    occasionally write about the music business and other personal things but lately I'm using this
+                    as a scratch pad to write about my new gig.
                 </p>
                 <p>
                     So welcome and please have a look around.
                 </p>
-                <p><em>- Grubb, March 2016</em></p>
+                <p><em>- Grubb, November 2016</em></p>
             </div>
         </section>
     </div>
@@ -41,5 +42,4 @@
 
 @section('content')
     @include('posts/index')
-    <a class="pure-button pure-button-primary" href="#">The blog archive -></a>
 @endsection

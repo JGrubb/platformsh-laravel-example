@@ -6,8 +6,12 @@ runtime:
     - redis
 build:
   flavor: composer
-disk: 2048
+disk: 4000
 web:
+  commands:
+    start: |
+      ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
+      /usr/sbin/php-fpm7.0
   locations:
     "/":
       root: "public"
@@ -15,26 +19,36 @@ web:
         - index.php
       allow: true
       passthru: "/index.php"
+    "/uploads":
+      root: "Dropbox/ibd_website_images"
+      passthru: false
+      allow: true
+      scripts: false
 mounts:
-  "/storage/app/public": "shared:files/storage/app/public"
-  "/storage/framework/views": "shared:files/storage/framework/views"
-  "/storage/framework/sessions": "shared:files/storage/framework/sessions"
-  "/storage/framework/cache": "shared:files/storage/framework/cache"
-  "/storage/logs": "shared:files/logs"
-  "/bootstrap/cache": "shared:files/bootstrap_cache"
+  "storage/app/public": "shared:files/public"
+  "storage/framework/views": "shared:files/views"
+  "storage/framework/sessions": "shared:files/sessions"
+  "storage/framework/cache": "shared:files/cache"
+  "storage/logs": "shared:files/logs"
+  "bootstrap/cache": "shared:files/bootstrap_cache"
+  "Dropbox": "shared:files/dropbox"
+  ".dropbox": "shared:files/dropbox-meta"
 relationships:
-  database: "pgsql:postgresql"
+  database: "pgsql96:postgresql"
   redis: "rediscache:redis"
-
 dependencies:
   ruby:
     sass: "*"
   nodejs:
     gulp-cli: "*"
-
+    yarn: "*"
 hooks:
   build: |
-    npm install
+    yarn install
     gulp default
+    gzip -k public/js/all.js
+    gzip -k public/css/app.css
+    wget "https://www.dropbox.com/download?plat=lnx.x86_64" -O archive.tar && tar xzvf archive.tar && rm archive.tar
   deploy: |
+    nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
     php artisan migrate --force

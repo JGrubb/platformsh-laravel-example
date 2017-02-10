@@ -1,4 +1,4 @@
-@extends("layouts/base")
+@extends("layouts/base", ['description' => $post->truncatedSummary, 'title' => $post->title])
 
 @section('content')
 
@@ -6,12 +6,12 @@
     @include('posts/_prev_next_buttons')
     <header class="post-header">
         <h2 class="post-title">{{ $post->title }}</h2>
-        <time>{{ $post->pub_date }}</time>
+        <time>{{ $post->published_at() }}</time>
         in @include('posts/_tags')
     </header>
 
     <div class="post-description">
-        {!! $post->body !!}
+        {!! $post->renderedBody !!}
 
         <div id="related">
             Related stuff here
