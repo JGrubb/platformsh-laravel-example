@@ -51,7 +51,7 @@ hooks:
     wget "https://www.dropbox.com/download?plat=lnx.x86_64" -O archive.tar && tar xzvf archive.tar && rm archive.tar
     wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.0.tar.gz && tar xzvf ncurses-6.0.tar.gz
     cd ncurses-6.0
-    ./configure --with-prefix=/app/.global
+    ./configure --with-prefix=/app/.global --without-manpages
     make && make install
     # cd ~
     # wget https://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz && tar xzvf htop-2.0.2.tar.gz
