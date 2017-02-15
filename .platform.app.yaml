@@ -53,11 +53,11 @@ hooks:
     cd ncurses-6.0
     ./configure --with-prefix=/app/.global
     make && make install
-    cd ~
-    wget https://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz && tar xzvf htop-2.0.2.tar.gz
-    cd htop-2.0.2
-    ./configure --with-prefix=/app/.global
-    make && make install
+    # cd ~
+    # wget https://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz && tar xzvf htop-2.0.2.tar.gz
+    # cd htop-2.0.2
+    # ./configure --with-prefix=/app/.global
+    # make && make install
   deploy: |
     nohup ~/.dropbox-dist/dropboxd >/dev/null 2>&1 &
     php artisan migrate --force
