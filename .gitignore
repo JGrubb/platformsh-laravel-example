@@ -11,4 +11,5 @@ Vagrantfile
 .vagrant_ide_helper.php
 _ide_helper.php
 .vagrant
-*.sql
+*.sqlposts
+posts/*
